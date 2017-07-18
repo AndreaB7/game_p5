@@ -1,6 +1,7 @@
 // inicializas el array
 var balls = [];
 var total = 20;
+var paddle;
 
 // 001
 function setup() {
@@ -11,6 +12,9 @@ function setup() {
     // every time value ball --> we add a new instance of the object
     balls[i] = new Ball();
   }
+  // capital P to denote the name of the class
+  // lowercase P to denote the instance of the class
+  paddle = new Paddle();
 }
 
 // 002
@@ -21,6 +25,9 @@ function draw() {
     balls[i].update();
     balls[i].render();
   }
+
+  paddle.update();
+  paddle.render();
 }
 
 // 005
@@ -96,15 +103,18 @@ function Ball(paddle) {
   this.init();
 }
 
-//004
+//004 OBJECT PADDLE
 function Paddle() {
   this.width = 50;
+  this.height = 20;
+  this.speed = 50;
   this.x = width/2 - this.width/2;
   this.y = height - 30;
 
-  this.update = function() {
+  this.update = function(){
   }
 
+  // MÉTODO: lo que se dibuja
   this.render = function(){
     rect(this.x, this.y, this.width, this.height)
   }
@@ -124,4 +134,4 @@ function Paddle() {
   }
 }
 
-//console.log("https://www.kadenze.com/courses/introduction-to-programming-for-the-visual-arts-with-p5-js-vi/sessions/synthesis-b-game");
+console.log("https://www.kadenze.com/courses/introduction-to-programming-for-the-visual-arts-with-p5-js-vi/sessions/synthesis-b-game");
