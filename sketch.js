@@ -65,11 +65,17 @@ function Paddle() {
   this.score = function() {
     // hacemos referencia directamente a la instancia, no al constructor
     paddle.color = color(0,255,0);
+    score++;
+    console.log(score);
+    paddle.width += 1;
   }
 
   // 010 MÉTODO : HIT
   this.hit = function() {
-    this.color = color(255, 255, 0);
+    paddle.color = color(255, 255, 0);
+    lives--;
+    console.log("LIVE SCORE:" + lives);
+    paddle.width -= 5;
   }
 
   // MÉTODO: lo que se dibuja
@@ -113,7 +119,7 @@ function Ball(paddle) {
     if (this.bad){
       fill(255, 0, 0);
     } else {
-    fill(0,0,255);
+      fill(0,0,255);
     }
 
     noStroke();
@@ -158,11 +164,8 @@ function Ball(paddle) {
 
       if(this.bad){
         this.paddle.hit();
-        lives --;
       } else {
-      this.paddle.score();
-      score ++;
-      console.log(score);
+        this.paddle.score();
       }
 
       this.init();
