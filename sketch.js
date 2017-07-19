@@ -19,11 +19,8 @@ var paddle;
 var state = 0;
 
 // 017 poder acceder a las variables de modo global
-//var startCenterX = width/2 -10 ;
-//var startCenterX;
-//var startCenterY;
-var startCenterX = 240 ;
-var startCenterY = 472;
+var startCenterX;
+var startCenterY;
 var startButtonSize = 130;
 
 // ======== 001: SETUP ========= // elementos del inicio
@@ -82,11 +79,30 @@ function drawPlaying() {
   }
   paddle.update();
   paddle.render();
+
+  if (lives === 0){
+    gameOver();
+  }
+  textSize(20);
+  textAlign(LEFT);
+  text("Score: " + score, 10, 10);
+  text("Lives: " + lives, 10, 40);
 }
 
-// ======== 013c: DRAW END ========= // non-linear narrative
+// ======== 013c: DRAW END creación========= // non-linear narrative
+// 020: DRAW EN WRITE FUNCTION
 
 function drawEnd() {
+  textSize(50);
+  textAlign(CENTER, CENTER);
+  fill(255, 0, 0);
+  ellipse(startCenterX, startCenterY, startButtonSize, startButtonSize);
+
+  fill(255);
+  noStroke();
+  text(score, 0, 300, width, 55);
+  text("Would you like to play again?", 0, 50, width, 100);
+  text("YES",0,450, width, 50);
 
 }
 
@@ -108,7 +124,12 @@ function startGame() {
   paddle = new Paddle();
 
   state = 1;
+}
 
+// ======== 019: funcion Game Over ========= //
+
+function gameOver(){
+  state = 2;
 }
 
 
@@ -147,7 +168,7 @@ function keyPressed() {
 function Paddle() {
   this.width = 50;
   this.height = 20;
-  this.speed = 50;
+  this.speed = 80;
   this.x = width/2 - this.width/2;
   this.y = height - 30;
   this.color = color(255,0,0);
@@ -169,7 +190,7 @@ function Paddle() {
     paddle.color = color(255, 255, 0);
     lives--;
     console.log("LIVE SCORE:" + lives);
-    paddle.width -= 5;
+    paddle.width -= 10;
   }
 
   // MÉTODO: lo que se dibuja
@@ -202,8 +223,8 @@ function Ball(paddle) {
   this.paddle = new Paddle;
   this.size = 20;
   this.speed = 10;
-  // 011 poison balls, less than 5 in 100 numbers
-  this.bad = (random(0, 100) < 5);
+  // 011 poison balls, less than 10 in 100 numbers
+  this.bad = (random(0, 100) < 10);
 
   // método que inicializa la ball con RANDOM
   this.init = function() {
