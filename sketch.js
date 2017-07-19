@@ -6,9 +6,9 @@
 
 var balls = [];
 var total = 20;
-var paddle;
 var score = 0;
 var lives = 3;
+var paddle;
 
 /* NON LINEAR NARRATIVES : states of the game 012
   0 = intro
@@ -19,8 +19,11 @@ var lives = 3;
 var state = 0;
 
 // 017 poder acceder a las variables de modo global
-var startCenterX;
-var startCenterY;
+//var startCenterX = width/2 -10 ;
+//var startCenterX;
+//var startCenterY;
+var startCenterX = 240 ;
+var startCenterY = 472;
 var startButtonSize = 130;
 
 // ======== 001: SETUP ========= // elementos del inicio
@@ -29,9 +32,8 @@ function setup() {
 
 	createCanvas(1000,600);
 
-  startcenterX = width/2 -10 ;
-  startcenterY = 472;
-
+  startCenterX = width/2 -10 ;
+  startCenterY = 472;
   textFont("Helvetica");
   textSize(50);
   textAlign(CENTER, CENTER);
@@ -58,8 +60,7 @@ function drawIntro() {
 
   // 015 creamos el botón exactamente donde se sitúa el texto y lo ponemos más arriba (se sitúa debajo del punto 014)
   fill(255, 0, 0);
-  ellipse(startcenterX, startcenterY, startButtonSize, startButtonSize);
-
+  ellipse(startCenterX, startCenterY, startButtonSize, startButtonSize);
   // 014 especificaciones de la pantalla intro
   fill(255);
   noStroke();
@@ -116,6 +117,7 @@ function startGame() {
 function mousePressed() {
   if (state === 0 || state === 2){
     // if the distance bw the mouse and the center is less than half the size of the button: the user click inside of button
+
     var d = dist(mouseX, mouseY, startCenterX, startCenterY);
     console.log(d);
 
